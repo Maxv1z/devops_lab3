@@ -149,7 +149,7 @@ for (int i = 0; i < 2000000; i++) {
     aValues.push_back(distr(mtre));
 }
 
-for (int i = 0; i < 400; i++) {
+for (int i = 0; i < 300; i++) {
     // Apply the trigonometric function to each element
     for (auto& val : aValues) {
         val = calc.calculate(val, 10); // Using 10 terms for the Taylor series
