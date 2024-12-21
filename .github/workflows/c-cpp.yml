@@ -37,27 +37,3 @@ jobs:
         with:
           name: test-logs
           path: test-suite.log
-
-      - name: Setup QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: List Buildx builders
-        run: docker buildx ls
-
-      - name: DockerHub login
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build Docker image for amd64
-        run: docker build --platform=linux/amd64 -t mav1z/httpserver:amd64 --push .
-
-      - name: Build Docker image for arm64
-        run: docker build --platform=linux/arm64 -t mav1z/httpserver:arm64 --push .
-
-      - name: Create Docker manifest
-        run: docker manifest create mav1z/httpserver --amend mav1z/httpserver:amd64 --amend mav1z/httpserver:arm64
-
-      - name: Push Docker manifest
-        run: docker manifest push mav1z/httpserver
